@@ -1,0 +1,24 @@
+{
+  "name": "picture-cloud",
+  "version": "1.0.5",
+  "description": "Cloud Save Pictures",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "strart": "node demo"
+  },
+  "author": "Eason",
+  "license": "MIT",
+  "dependencies": {
+    "connect-multiparty": "^2.0.0",
+    "cors": "^2.7.1",
+    "express": "^4.14.0",
+    "image-size": "^0.5.0",
+    "mongoose": "^4.5.7",
+    "qiniu": "^6.1.11",
+    "url-join": "^1.1.0"
+  }
+}
