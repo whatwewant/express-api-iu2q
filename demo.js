@@ -9,6 +9,8 @@ var pictureCloud = require('./src');
 var port = process.env.PORT || 4000;
 
 var app = express();
+app.set('view engine', 'ejs');
+app.set('views', './publics');
 
 var DBURL = 'mongodb://localhost/picturecloud';
 mongoose.connect(DBURL, function (err) {
@@ -26,7 +28,11 @@ app.use(function (err, req, res, next) {
   }
 });
 
-app.use('/', pictureCloud({
+app.use('/', function (req, res, next) {
+  res.render('index.html', {});
+});
+
+app.use('/v1/image', pictureCloud({
   ACCESS_KEY: '<YOUR ACCESS KEY>',
   SECRET_KEY: '<YOUR SECRET KEY>',
   BUCKET: '<YOUR BUCKET NAME>',

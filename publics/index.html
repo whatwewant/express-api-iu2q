@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Image Saving</title>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//statics.uberqd.com/libs/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="//cdn.css.net/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//statics.uberqd.com/libs/js/fileinput.min.js" type="text/javascript"></script>
+    <script src="//statics.uberqd.com/libs/js/fileinput_locale_zh.js" type="text/javascript"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
+    <style>
+        html {
+          position: relative;
+          min-height: 100%;
+        }
+        body {
+          margin-bottom: 60px;
+        }
+        .footer {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          height: 60px;
+          background-color: #f5f5f5;
+        }
+        
+        body > .container {
+          padding: 60px 15px 0;
+        }
+        .container .text-muted {
+          margin: 20px 0;
+        }
+        
+        .footer > .container {
+          padding-right: 15px;
+          padding-left: 15px;
+        }
+        
+        code {
+          font-size: 80%;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">SM.MS</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/doc">API</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+    </nav>
+    <div class="container kv-main">
+        <div class="page-header">
+            <h1>Image Upload</h1> 5 MB max per file. 10 files max per request.
+            </div>
+            <form enctype="multipart/form-data">
+                <div class="form-group">
+                    <input id="smfile" type="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="1" data-max-file-count="10" name="smfile" accept="image/*">
+                </div>
+            </form>
+            <div id="showurl" style="display: none;">
+                <ul id="navTab" class="nav nav-tabs">
+                    <li class="active"><a href="#urlcodes" data-toggle="tab">URL</a></li>
+                    <li><a href="#htmlcodes" data-toggle="tab">HTML</a></li>
+                    <li><a href="#bbcodes" data-toggle="tab">BBCode</a></li>
+                    <li><a href="#markdowncodes" data-toggle="tab">Markdown</a></li>
+                </ul>
+                <div id="navTabContent" class="tab-content">
+                    <div class="tab-pane fade in active" id="urlcodes">
+                        <pre style="margin-top: 5px;"><code id="urlcode"></code></pre>
+                    </div>
+                    <div class="tab-pane fade" id="htmlcodes">
+                        <pre style="margin-top: 5px;"><code id="htmlcode"></code></pre>
+                    </div>
+                    <div class="tab-pane fade" id="bbcodes">
+                        <pre style="margin-top: 5px;"><code id="bbcode"></code></pre>
+                    </div>
+                    <div class="tab-pane fade" id="markdowncodes">
+                        <pre style="margin-top: 5px;"><code id="markdown"></code></pre>
+                    </div>
+                </div>
+            </div>
+        <script>
+        $("#smfile").fileinput({
+            uploadUrl: '/v1/image?inajax=1&ssl=1',
+            allowedFileExtensions : ['jpeg', 'jpg', 'png', 'gif', 'bmp'],
+            overwriteInitial: false,
+            maxFileSize: 5120,
+            maxFilesNum: 10,
+        });
+        $('#smfile').on('fileuploaded', function(event, data, previewId, index) {
+            var form = data.form, files = data.files, extra = data.extra, response = data.response, reader = data.reader;
+            if(response.code == 'success') {
+                if ( $("showurl").css("display") ) {
+                    $('#urlcode').append(response.data.url + "\n");
+                    $('#htmlcode').append("&lt;img src=\""+ response.data.url +"\" alt=\""+ files[index].name +"\" title=\""+ files[index].name +"\" /&gt;" + "\n");
+                    $('#bbcode').append("[img]"+ response.data.url +"[/img]" + "\n");
+                    $('#markdown').append("!["+ files[index].name +"](" + response.data.url + ")" + "\n");
+                    
+                } else if (response.data.url) {
+                    $("#showurl").show();
+                    $('#urlcode').append(response.data.url + "\n");
+                    $('#htmlcode').append("&lt;img src=\""+ response.data.url +"\" alt=\""+ files[index].name +"\" title=\""+ files[index].name +"\" /&gt;" + "\n");
+                    $('#bbcode').append("[img]"+ response.data.url +"[/img]" + "\n");
+                    $('#markdown').append("!["+ files[index].name +"](" + response.data.url + ")" + "\n");
+                }
+            }
+        });
+        </script>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">Copyright &#9400; 2015 Cat Networks Hong Kong Limited. All rights reserved. 请勿上传违反中国大陆和香港法律的图片，违者后果自负。</p>
+        </div>
+    </footer>
+    <div style="display: none;">
+        <script type="text/javascript">
+            var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+            document.write(unescape("%3Cspan id='cnzz_stat_icon_1255203060'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/stat.php%3Fid%3D1255203060' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+    </div>
+</body>
+</html>
+
