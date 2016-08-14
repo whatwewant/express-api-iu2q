@@ -44,6 +44,10 @@ app.use('/v1/image', pictureCloud({
   DOMAIN: '<YOUR DOMAIN>',
 }));
 
+app.use(function (req, res, next) {
+  res.sendStatus(404);
+});
+
 app.listen(port, "127.0.0.1", function (err) {
   if (err) {
     console.log(err);
