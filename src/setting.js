@@ -7,7 +7,7 @@ module.exports = {
     ACCESS_KEY: '<YOUR ACCESS KEY>',
     SECRET_KEY: '<YOUR SECRET KEY>',
     BUCKET: '<YOUR BUCKET>',
-    DOMAIN: '<YOUR DOMAIN>'
+    DOMAIN: '<YOUR DOMAIN>',
     PREFIX: 'imagesaving',
   },
   limit: {

@@ -12,7 +12,7 @@ var PREFIX = SETTING.PREFIX;
 
 module.exports = function (qiniu) {
   Object.assign(FILELIMIT, qiniu.conf.limit);
-  Object.assign(PREFIX, qiniu.conf.PREFIX);
+  PREFIX = qiniu.conf.PREFIX || PREFIX;
 
   return {
     list: function (req, res, next) {
