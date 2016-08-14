@@ -1,6 +1,6 @@
 {
   "name": "picture-cloud",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Cloud Save Pictures",
   "main": "index.js",
   "directories": {
