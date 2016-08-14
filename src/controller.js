@@ -42,8 +42,9 @@ module.exports = function (qiniu) {
 
     create: function (req, res, next) {
       var { originalFilename, name, path, type, size, md5 } = req.locals.file;
+      var ext = name.split('.').length <= 1 ? 'png' : name.split('.').pop();
 
-      new FileUpload(qiniu, md5, path, PREFIX).upload(function (err, ret) {
+      new FileUpload(qiniu, md5+'.'+ext, path, PREFIX).upload(function (err, ret) {
         if (err) return next(err);
 
         var { hash, key, persistentId } = ret;
