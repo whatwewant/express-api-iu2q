@@ -64,7 +64,6 @@ module.exports = function (qiniu) {
           }, function (err, pc) {
             if (err) return next(err);
 
-            // console.log(pc);
             res.json(pc)
           });
       });
@@ -93,7 +92,7 @@ module.exports = function (qiniu) {
         })
     },
 
-    createFilesFilter: function (req, res, next) {
+    createFileFilter: function (req, res, next) {
       req.locals = { file: req.files.file || req.files.smfile || req.files.file_data };
       if (! req.locals.file) return next(new Error('No Files'));
 

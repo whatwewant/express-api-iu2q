@@ -14,7 +14,7 @@ module.exports = function (conf) {
     .route('/')
     .get(Picture.list)
     .post(
-      Picture.createFilesFilter,
+      Picture.createFileFilter,
       Picture.createFileSizeLimit,
       Picture.createFileTypeLimit,
       Picture.createFileExistFilter,
