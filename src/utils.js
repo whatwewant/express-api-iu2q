@@ -21,9 +21,9 @@ Md5.prototype.md5SumFile = function (filename, type, size) {
 };
 
 
-function FileUpload (qiniu, key, filePath) {
+function FileUpload (qiniu, key, filePath, prefix='') {
   this.bucket = qiniu.conf.BUCKET;
-  this.key = path.join(DATE, key);
+  this.key = path.join(prefix, DATE, key);
   this.filePath = filePath;
 }
 

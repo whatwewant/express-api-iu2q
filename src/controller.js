@@ -8,9 +8,11 @@ var { Md5, FileUpload } = require('./utils');
 
 var SETTING = require('./setting');
 var FILELIMIT = SETTING.limit;
+var PREFIX = SETTING.PREFIX;
 
 module.exports = function (qiniu) {
   Object.assign(FILELIMIT, qiniu.conf.limit);
+  Object.assign(PREFIX, qiniu.conf.PREFIX);
 
   return {
     list: function (req, res, next) {
@@ -41,7 +43,7 @@ module.exports = function (qiniu) {
     create: function (req, res, next) {
       var { originalFilename, name, path, type, size, md5 } = req.locals.file;
 
-      new FileUpload(qiniu, md5, path).upload(function (err, ret) {
+      new FileUpload(qiniu, md5, path, PREFIX).upload(function (err, ret) {
         if (err) return next(err);
 
         var { hash, key, persistentId } = ret;

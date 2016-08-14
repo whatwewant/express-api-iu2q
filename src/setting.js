@@ -8,6 +8,7 @@ module.exports = {
     SECRET_KEY: '<YOUR SECRET KEY>',
     BUCKET: '<YOUR BUCKET>',
     DOMAIN: '<YOUR DOMAIN>'
+    PREFIX: 'imagesaving',
   },
   limit: {
     types: ['png', 'gif', 'jpeg', 'jpg', 'svg+xml'],
