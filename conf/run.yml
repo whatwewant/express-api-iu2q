@@ -1,5 +1,5 @@
 apps:
-  - script    : demo.js
+  - script    : ./demo.js
     instance  : 4
     env       :
       NODE_ENV: development
