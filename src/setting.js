@@ -10,7 +10,7 @@ module.exports = {
     DOMAIN: '<YOUR DOMAIN>'
   },
   limit: {
-    types: [ 'png', 'jpg', 'gif', 'jpeg'],
+    types: ['png', 'gif', 'jpeg', 'jpg', 'svg+xml'],
     size: {
       min: 1,
       max: 4*1024*1024,
