@@ -19,7 +19,12 @@ mongoose.connect(DBURL, function (err) {
   }
 });
 
-app.use(cors());
+app.use(cors({
+  allowedOrigins: [
+    'example.com',
+    '*.example.com'
+  ]
+}));
 app.use(multipart());
 app.use(function (err, req, res, next) {
   if (err) {
@@ -28,8 +33,8 @@ app.use(function (err, req, res, next) {
   }
 });
 
-app.use('/', function (req, res, next) {
-  res.render('index.html', {});
+app.get('/', function (req, res) {
+  res.render('index', {});
 });
 
 app.use('/v1/image', pictureCloud({

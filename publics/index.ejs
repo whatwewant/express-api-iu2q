@@ -53,7 +53,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">SM.MS</a>
+                <a class="navbar-brand" href="/">Image Saving</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -101,20 +101,23 @@
         <script>
         $("#smfile").fileinput({
             uploadUrl: '/v1/image?inajax=1&ssl=1',
-            allowedFileExtensions : ['jpeg', 'jpg', 'png', 'gif', 'bmp'],
+            allowedFileExtensions : ['jpeg', 'jpg', 'png', 'gif', 'bmp', 'svg'],
             overwriteInitial: false,
             maxFileSize: 5120,
             maxFilesNum: 10,
         });
         $('#smfile').on('fileuploaded', function(event, data, previewId, index) {
-            var form = data.form, files = data.files, extra = data.extra, response = data.response, reader = data.reader;
-            if(response.code == 'success') {
+          var form = data.form, 
+              files = data.files, 
+              extra = data.extra,
+              response = data.response, reader = data.reader;
+            if(response.errcode === undefined) {
+                response.data = response;
                 if ( $("showurl").css("display") ) {
                     $('#urlcode').append(response.data.url + "\n");
                     $('#htmlcode').append("&lt;img src=\""+ response.data.url +"\" alt=\""+ files[index].name +"\" title=\""+ files[index].name +"\" /&gt;" + "\n");
                     $('#bbcode').append("[img]"+ response.data.url +"[/img]" + "\n");
                     $('#markdown').append("!["+ files[index].name +"](" + response.data.url + ")" + "\n");
-                    
                 } else if (response.data.url) {
                     $("#showurl").show();
                     $('#urlcode').append(response.data.url + "\n");

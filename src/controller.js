@@ -91,7 +91,9 @@ module.exports = function (qiniu) {
     },
 
     createFilesFilter: function (req, res, next) {
-      req.locals = { file: req.files.files[0] };
+      req.locals = { file: req.files.file || req.files.smfile || req.files.file_data };
+      if (! req.locals.file) return next(new Error('No Files'));
+
       next();
     },
 

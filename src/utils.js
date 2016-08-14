@@ -3,7 +3,7 @@ var path = require('path');
 var crypto = require('crypto');
 
 // var SETTING = require('./setting');
-var DATE = `${new Date().getFullYear()}/${new Date().getMonth()}/${new Date().getDate()}`
+var DATE = `${new Date().getFullYear()}/${new Date().getMonth() + 1}/${new Date().getDate()}`
 
 // Object.assign(qiniu.conf, SETTING.qiniu);
 
