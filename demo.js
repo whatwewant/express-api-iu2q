@@ -42,6 +42,7 @@ app.use('/v1/image', pictureCloud({
   SECRET_KEY: '<YOUR SECRET KEY>',
   BUCKET: '<YOUR BUCKET NAME>',
   DOMAIN: '<YOUR DOMAIN>',
+  PREFIX: 'image-saving',
 }));
 
 app.use(function (req, res, next) {
