@@ -29,8 +29,8 @@ app.use(PATH, imageSaving({
 * Step 3: Install Dependencies
   * `cd ImageSaving && npm i && npm install -g pm2`
 * Step 4: Config Nginx
-  * Edit `conf/web.nginx.conf`
-  * Modify `server_name`
+  * Edit `conf/web.nginx.conf` Modify `server_name`
+  * Edit `demo.js` Modify `example.com` and `*.example.com`
   * Include to main nginx http conf: `include path/to/ImageSaving/conf/web.nginx.conf`
   * Reload Nginx Service
 * Step 5: Start Demo Server
