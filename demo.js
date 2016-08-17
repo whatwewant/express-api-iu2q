@@ -37,16 +37,27 @@ app.get('/', function (req, res) {
   res.render('index', {});
 });
 
+app.get('/v1/image', function (req, res, next) {
+    return res.sendStatus(403);
+});
+
 app.use('/v1/image', pictureCloud({
   ACCESS_KEY: '<YOUR ACCESS KEY>',
   SECRET_KEY: '<YOUR SECRET KEY>',
   BUCKET: '<YOUR BUCKET NAME>',
   DOMAIN: '<YOUR DOMAIN>',
   PREFIX: 'image-saving',
+  limit: {
+    types: ['png', 'gif', 'jpeg', 'jpg', 'svg+xml'],
+    size: {
+      min: 0,
+      max: 100 * 1024 * 1024,
+    }
+  }
 }));
 
 app.use(function (req, res, next) {
-  res.sendStatus(404);
+    res.sendStatus(404);
 });
 
 app.listen(port, "127.0.0.1", function (err) {
