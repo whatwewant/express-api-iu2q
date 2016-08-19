@@ -24,6 +24,7 @@ app.use(PATH, imageSaving({
 ### API Usage
 
 | ID | FUNCTION | URL | METHOD | PARAMS | DATA | RETURN |
+|:---|:---------|:----|:-------|:-------|:-----|:-------|
 | 1  | Upload a image, then return image url | `/` | `POST` | - | Name: file, Type: File | JSON { name: ORIGINAL_NAME, url: IMAGE_URL } |
 | 2  | List all uploaded images | `/` | `GET` | (OPTIONS) offset(Number), count(Number) | - | JSON { offset: Number, count: Number, total: Number, data: ArrayOf(Object) } |
 | 3  | Retrieve a image by id | `/:id`| `GET` | - | - | JSON { _id, name, size, width, height, url, createdAt, updatedAt ... } |
